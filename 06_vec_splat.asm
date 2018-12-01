@@ -13,7 +13,6 @@
 #		   In this case, our format would be vec _splat $s0:$s1, $t0:$t1, $a0
 # Register usage:   
 #
-#
 #		    $t0: Elements 0-3 of Vector a
 #		    $t1: Elements 4-7 of Vector a
 #		    $s0: Elements 0-3 of Vector d
