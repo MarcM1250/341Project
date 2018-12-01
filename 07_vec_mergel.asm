@@ -12,17 +12,12 @@
 #
 # Register usage:   $s0: Upper 32 bits of vector d
 #		    $s1: Lower 32 bits of vector d
-#		    $t0: Upper 32 bits of vector a
 #		    $t1: Lower 32 bits of vector a
-#		    $t2: Upper 32 bits of vector b
 #		    $t3: Lower 32 bits of vector b
-#		    $t4: Used for byte selection
 #		    $t5: Holds byte 4 of vector a or b
 #		    $t6: Holds byte 5 of vector a or b
 #		    $t7: Holds byte 6 of vector a or b
 #		    $t8: Holds byte 7 of vector a or b
-#
-# Notes:     
 #
 #******************************************************************************************
 	
