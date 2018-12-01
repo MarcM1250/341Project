@@ -2,7 +2,7 @@
 #
 # File name:        05_vec_msums.asm
 # Version:          1.0
-# Date:             March 30, 2015  
+# Date:             December 3, 2018  
 # Programmer:       Anton Carrillo && Marc Marcelino
 #
 # Description:
