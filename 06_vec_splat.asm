@@ -3,7 +3,7 @@
 # File name:       06_vec_splat.asm
 # Version:         1.0
 # Date:            December 3, 2018  
-# Programmer:      Antom Carrillo and Marc Marcelino 
+# Programmer:      Anton Carrillo and Marc Marcelino 
 #
 # Description:     The vector splat instruction is used to select an element from one vector
 #		   and copy it onto every element of another vector.
