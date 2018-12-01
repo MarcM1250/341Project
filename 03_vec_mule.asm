@@ -8,16 +8,18 @@
 # Description:      Each element of vector d is the full-length (16 bit) product of the 
 #		    corresponding high (even) half-width elements of vector a and vector b
 #		   
-# Register Usage:   $t0: Upper 32 bits of vector a
+# Register Usage: 
+#		    $t0: Upper 32 bits of vector a
 #		    $t1: Lower 32 bits of vector a
 #		    $t2: Upper 32 bits of vector b
 #		    $t3: Lower 32 bits of vector b
 #		    $s0: Upper 32 bits of vector d
 #		    $s1: Lower 32 bits of vector d 
 #
+#		    $t4: Used for temporary arithmetic operations
+#		    $t5: Used for temporary arithmetic operations
 #		    $t6: Used for temporary arithmetic operations
 #		    $t7: Used for temporary arithmetic operations
-#		    $t8: Used for temporary arithmetic operations
 #
 #******************************************************************************************
 	
@@ -74,7 +76,7 @@ main:      # ************* Code starts here ***********
            srl $t7, $t7, 24	
            srl $t6, $t3, 24	   	
 
-           # Multiply even bytes and save them in lower 32 vector d ($s1)
+           # Multiply even bytes and save them in upper 32 vector d ($s1)
 
            mult $t4, $t6		
            mflo $t4
