@@ -1,8 +1,8 @@
 #*************************** 3 4 1   T o p    L e v e l   M o d u l e *************************
 #
-# File name:        03_mulo.asm
+# File name:        04_vec_mulo.asm
 # Version:          1.0
-# Date:             November 26, 2018  
+# Date:             December 3, 2018  
 # Programmers:      Anton Carrillo && Marc Marcelino
 #
 # Description:      Each element of vector d is the full-length (16 bit) product of the 
@@ -101,13 +101,5 @@ exit:      ori        $v0, $zero, 10     # $v0 <-- function code for "exit"
            #  P R O J E C T    R E L A T E D    S U B R O U T I N E S
            #*************************************************************
 proc1:     j         proc1               # "placeholder" stub
-
-
-
-           #*************************************************************
-           #  P R O J E C T    R E L A T E D    D A T A   S E C T I O N
-           #************************************************************* 
-           .data                         # place variables, arrays, and
-                                         # constants, etc. in this area
                                          
                                          
