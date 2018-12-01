@@ -19,9 +19,6 @@
 #		    $t7: Used for temporary arithmetic operations
 #		    $t8: Used for temporary arithmetic operations
 #
-#		    $s2: Used for vector byte multiplication
-#		    $s3: Used for vector byte multiplication
-#
 #******************************************************************************************
 	
            #**********************************************************
