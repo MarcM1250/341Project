@@ -2,7 +2,7 @@
 #
 # File name:        07_vec_mergel.asm
 # Version:          1.0
-# Date:             November 26, 2018  
+# Date:             December 3, 2018 
 # Programmers:      Anton Carrillo && Marc Marcelino
 #
 # Description:      Even elements of the result vector D are obtained left-to-right from the low 
@@ -93,9 +93,3 @@ exit:      ori        $v0, $zero, 10     # $v0 <-- function code for "exit"
 proc1:     j         proc1               # "placeholder" stub
 
 
-
-           #*************************************************************
-           #  P R O J E C T    R E L A T E D    D A T A   S E C T I O N
-           #************************************************************* 
-           .data                         # place variables, arrays, and
-                                         # constants, etc. in this area
