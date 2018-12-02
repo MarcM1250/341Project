@@ -49,33 +49,40 @@ main:		#Initializations
 
 loop:
 		beq $v1, 8, exit		# We are done
-		
 		slti $v0, $v1, 4
 		beq $v0, $zero, upper32
 
 		# Lower 32 bits 		
 		and $t4, $t0, $t8		# Get 8 bits from lower vector A
 		and $t5, $t2, $t8		# Get 8 bits from lower vector B
-		add $s0, $s0, $t6		# Store in lower 32 of vector D
+
 		j continue	
 				
 upper32:	# Upper 32 bits 
-
 		bne $v1, 4, skipReset		# are we in v[4]? 
-		addi $t8, $zero, 0xFF000000	# --> Reset mask	
-skipReset:	and $t4, $t1, $t8		# Get 8 bits from upper vector A
+		addi $t8, $zero, 0xFF000000	# --> Reset mask
+		addi $s1, $zero, 0		# Clear upper register
+			
+skipReset:	
+		and $t4, $t1, $t8		# Get 8 bits from upper vector A
 		and $t5, $t3, $t8		# Get 8 bits from upper vector B
-		add $s1, $s1, $t6		# Store in upper 32 of vector D
-
+		
 continue:	
-		addi $t6, $zero, 0	
-	  	beq $t4, $t5, equal
+		addi $t6, $zero, 0		# Nothing to add
+	  	beq $t4, $t5, equal		# Compare a[i] vs b[i]
 	  	j noequal
 equal:
-	  	add $t6, $t6, $t8
+	  	add $t6, $t6, $t8		# Put result in a temp register
 noequal:
-	  	srl $t8, $t8, 8
-	  	addi $v1, $v1, 1
+		# Saving registers
+		slti $v0, $v1, 4
+		beq $v0, $zero, saveUpper32
+		add $s0, $s0, $t6		# Store in lower 32 of vector D  
+saveUpper32:	
+		add $s1, $s1, $t6		# Store in upper 32 of vector D
+			
+	  	srl $t8, $t8, 8			# Shift 1 byte for next element
+	  	addi $v1, $v1, 1		# Increment counter
 	  	j loop
 	  			 			
 		# End of Template 		
