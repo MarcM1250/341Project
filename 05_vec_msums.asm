@@ -56,8 +56,8 @@ main:      # Initializations
 
            andi $t6, $t1, 0x0000FF00		# Get byte from a[6]
            andi $t7, $t3, 0x0000FF00		# Get byte from b[6]
-           srl $t6, $t6, 8			# Shit 8 bits to right
-           srl $t7, $t7, 8			# Shit 8 bits to right
+           srl $t6, $t6, 8			# Shift 8 bits to right
+           srl $t7, $t7, 8			# Shift 8 bits to right
            mulo $t5, $t6, $t7			# Multiply bytes
 
            add $t5, $t4, $t5			# Add products
@@ -76,8 +76,8 @@ main:      # Initializations
            # Calculate d[2]
            andi $t6, $t1, 0x00FF0000		# Get byte from a[5]
            andi $t7, $t3, 0x00FF0000		# Get byte from b[5]
-           srl $t6, $t6, 16			# Shit 16 bits to right
-           srl $t7, $t7, 16			# Shit 16 bits to right
+           srl $t6, $t6, 16			# Shift 16 bits to right
+           srl $t7, $t7, 16			# Shift 16 bits to right
            mulo $t4, $t6, $t7 			# Multiply bytes
 
            andi $t6, $t1, 0xFF000000		# Get byte from a[4]
@@ -108,8 +108,8 @@ index2_no_OVF:
 
            andi $t6, $t0, 0x0000FF00		# Get byte from a[2]
            andi $t7, $t2, 0x0000FF00		# Get byte from b[2]
-           srl $t6, $t6, 8			# Shit 8 bits to right
-           srl $t7, $t7, 8			# Shit 8 bits to right
+           srl $t6, $t6, 8			# Shift 8 bits to right
+           srl $t7, $t7, 8			# Shift 8 bits to right
            mulo $t5, $t6, $t7			# Multiply bytes
 
            add $t5, $t4, $t5			# Add products
@@ -128,8 +128,8 @@ index1_no_OVF:
            # Calculating d[0]
            andi $t6, $t0, 0x00FF0000		# Get byte from a[5]
            andi $t7, $t2, 0x00FF0000		# Get byte from b[5]
-           srl $t6, $t6, 16			# Shit 16 bits to right
-           srl $t7, $t7, 16			# Shit 16 bits to right
+           srl $t6, $t6, 16			# Shift 16 bits to right
+           srl $t7, $t7, 16			# Shift 16 bits to right
            mulo $t4, $t6, $t7 			# Multiply bytes
 
            andi $t6, $t0, 0xFF000000		# Get byte from a[4]
