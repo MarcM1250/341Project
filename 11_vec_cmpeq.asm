@@ -54,8 +54,8 @@ loop:
 		beq $v0, $zero, upper32
 
 		# Lower 32 bits 		
-		and $t4, $t1, $t8		# Get 8 bits from lower vector A
-		and $t5, $t3, $t8		# Get 8 bits from lower vector B
+		and $t4, $t0, $t8		# Get 8 bits from lower vector A
+		and $t5, $t2, $t8		# Get 8 bits from lower vector B
 		add $s0, $s0, $t6		# Store in lower 32 of vector D
 		j continue	
 				
@@ -63,8 +63,8 @@ upper32:	# Upper 32 bits
 
 		bne $v1, 4, skipReset		# are we in v[4]? 
 		addi $t8, $zero, 0xFF000000	# --> Reset mask	
-skipReset:	and $t4, $t0, $t8		# Get 8 bits from upper vector A
-		and $t5, $t2, $t8		# Get 8 bits from upper vector B
+skipReset:	and $t4, $t1, $t8		# Get 8 bits from upper vector A
+		and $t5, $t3, $t8		# Get 8 bits from upper vector B
 		add $s1, $s1, $t6		# Store in upper 32 of vector D
 
 continue:	
