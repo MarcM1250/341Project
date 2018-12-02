@@ -26,8 +26,6 @@
 #		    $t5: Holds the selected element address for jumping to
 #		    $t6: Holds the shifted position of vector a
 #
-# Notes:     
-#
 #******************************************************************************************
 
            #**********************************************************
@@ -126,8 +124,3 @@ elements:
 	   .word E0, E1, E2, E3, E4, E5, E6, E7
 	   .text
 	   
-
-
-        
-                      
-	
