@@ -1,6 +1,6 @@
 #*************************** 3 4 1   T o p    L e v e l   M o d u l e *************************
 #
-# File name:        01_vec_addsu.asm
+# File name:        02_vec_madd.asm
 # Version:          1.0
 # Date:             December 3, 2018  
 # Programmers:      Anton Carrillo && Marc Marcelino
