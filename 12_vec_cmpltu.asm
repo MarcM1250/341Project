@@ -10,10 +10,10 @@
 #		    Otherwise the element of result is FALSE (all bit = 0)
 #		    
 # Register usage:   
-#		    $t0: Lower 32 bits of vector a
-#		    $t1: Upper 32 bits of vector a
-#		    $t2: Lower 32 bits of vector b
-#		    $t3: Upper 32 bits of vector b
+#		    $t0: Upper 32 bits of vector a
+#		    $t1: Lower 32 bits of vector a
+#		    $t2: Upper 32 bits of vector b
+#		    $t3: Lower 32 bits of vector b
 #		    $s0: Upper 32 bits of vector d
 #		    $s1: Lower 32 bits of vector d
 #
@@ -50,22 +50,22 @@ loop:
 		beq $v1, 8, exit		# We are done
 		
 		slti $v0, $v1, 4
-		beq $v0, $zero, upper32
+		beq $v0, $zero, lower32
 
-		# Lower 32 bits 		
-		and $t4, $t0, $t8		# Get 8 bits from lower vector A
-		and $t5, $t2, $t8		# Get 8 bits from lower vector B
+		# Upper 32 bits 		
+		and $t4, $t0, $t8		# Get 8 bits from upper vector A
+		and $t5, $t2, $t8		# Get 8 bits from upper vector B
 
 		j continue	
 				
-upper32:	# Upper 32 bits 
+lower32:	# Lower 32 bits 
 
 		bne $v1, 4, skipReset		# are we in v[4]? 
 		addi $t8, $zero, 0xFF000000	# --> Reset mask
 		addi $s1, $zero, 0		# Clear upper register
 skipReset:	
-		and $t4, $t1, $t8		# Get 8 bits from upper vector A
-		and $t5, $t3, $t8		# Get 8 bits from upper vector B
+		and $t4, $t1, $t8		# Get 8 bits from lower vector A
+		and $t5, $t3, $t8		# Get 8 bits from lower vector B
 
 continue:	
 		addi $t6, $zero, 0		# Nothing to add
@@ -77,9 +77,9 @@ less:
 noless:
 		# Saving registers
 		slti $v0, $v1, 4
-		beq $v0, $zero, saveUpper32
-		add $s0, $s0, $t6		# Store in lower 32 of vector D  
-saveUpper32:	
+		beq $v0, $zero, saveLower32
+		add $s0, $s0, $t6		# Store in upper 32 of vector D  
+saveLower32:	
 		add $s1, $s1, $t6		# Store in upper 32 of vector D
 			
 	  	srl $t8, $t8, 8			# Shift 1 byte for next element
