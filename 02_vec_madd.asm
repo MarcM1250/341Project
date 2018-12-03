@@ -2,7 +2,7 @@
 #
 # File name:        01_vec_addsu.asm
 # Version:          1.0
-# Date:             November 26, 2018  
+# Date:             December 3, 2018  
 # Programmers:      Anton Carrillo && Marc Marcelino
 #
 # Description:      This baseline instruction performs a vector add saturated (unsigned)
