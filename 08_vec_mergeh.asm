@@ -74,7 +74,7 @@ main:      #Initializations
 						# 0000AA00 + 0x000000BB	
 		add $s5, $t6, $t7		# $s5 = 0x0000AABB
 		
-		# Store in $s0 upper 32 bit of vector D
+		# Store in $s0 lower 32 bit of vector D
 		add $s1, $s4, $s5
 		
 
