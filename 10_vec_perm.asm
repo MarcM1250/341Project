@@ -9,9 +9,9 @@
 #		    ver_perm uses vector C as a sophisticated mask and assigns corresponding
 #		    values of the operands A and B to the D vector. For example, element[i]
 #		    of A or B is mapped to element [j] of the vector D. Each "element specifier"
-# 		    in vector C has two componentes: the most-significant-half specifies an
+# 		    in vector C has two components: the most-significant-half specifies an
 #		    element from either vector A or B (0 = A, 1 = B)
-#		    The least-significan-half specifies which element within the selected
+#		    The least-significant-half specifies which element within the selected
 #		    vector [0..7]
 #
 # Register usage:   
