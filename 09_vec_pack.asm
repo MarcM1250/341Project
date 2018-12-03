@@ -32,8 +32,8 @@
            .globl main
 
 main:      #Initializations
-           addi $s0, $zero, 0			# Clear register to store lower 32 bits
-           addi $s1, $zero, 0			# Clear register to store upper 32 bits
+           addi $s0, $zero, 0			# Clear register to store upper 32 bits
+           addi $s1, $zero, 0			# Clear register to store lower 32 bits
            addi $v1, $zero, 0			# Counter
            addi $t9, $zero, 4			# Shift legth
 			
