@@ -1,6 +1,6 @@
 #*************************** SIMD MIPS Baseline Instructions *****************************
 #
-# File name:        09_vec_mergeh.asm
+# File name:        09_vec_pack.asm
 # Version:          1.0
 # Date:             December 3, 2018  
 # Programmers:      Anton Carrillo && Marc Marcelino
