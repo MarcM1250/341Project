@@ -23,7 +23,7 @@
 #         $s2: Number of elements in the vector (number of dimensions)
 #         $v0: Use to compare number of elements with number of loops
 #         $f1: Use to get vectorA[i]
-#         $f2: Temp used to save a vector element
+#         $f2: Float temp used to save a vector element
 #         $f3: Saves sum of squared elements
 #         $f4: Destination register
 #
@@ -38,7 +38,7 @@
 
 main:       # Setting testing values
 
-            la	 $s1, vectorA             # Get address of vector and store in $s1
+            la $s1, vectorA               # Get address of vector and store in $s1
             addi $t4, $zero, 2            # Put values into vector a for testing
             sw   $t4, 0($s1)	
             addi $t4, $zero, 5            # Value 2
@@ -46,7 +46,7 @@ main:       # Setting testing values
             addi $t4, $zero, 7            # Value 3
             sw   $t4, 8($s1) 
 
-            addi   $s2, $zero, 3	        # User will set number of elements
+            addi   $s2, $zero, 3	         # User will set number of elements
             add    $t0, $s2, $zero        # Use number of elements as counter for loop
             sub.s  $f3, $f3, $f3          # Clear $f3 (Can't use $0 for FP add) 
     	    
