@@ -10,10 +10,11 @@
 #		    from the low elements of vector B
 #		    
 #
-# Register usage:   $s0: Upper 32 bits of vector d
+# Register usage:
+#		    $s0: Upper 32 bits of vector d
 #		    $s1: Lower 32 bits of vector d
-#		    $t1: Lower 32 bits of vector a
-#		    $t3: Lower 32 bits of vector b
+#		    $t1: Upper 32 bits of vector a
+#		    $t3: Upper 32 bits of vector b
 #		    $t5: Holds byte 4 of vector a or b
 #		    $t6: Holds byte 5 of vector a or b
 #		    $t7: Holds byte 6 of vector a or b
@@ -57,7 +58,7 @@ main:      #Initializations
 						# 0000AA00 + 0x000000BB	
 		add $s5, $t6, $t7		# $s5 = 0x0000AABB
 		
-		# Store in $s0 lower 32 bit of vector D
+		# Store in $s0 upper 32 bit of vector D
 		add $s0, $s4, $s5
 			
 		# $s1
