@@ -8,7 +8,7 @@
 # Description:
 #		    ver_perm uses vector C as a sophisticated mask and assigns corresponding
 #		    values of the operands A and B to the D vector. For example, element[i]
-#		    of A or B is mapped to element [j] of the vector D. Each "element spacifier"
+#		    of A or B is mapped to element [j] of the vector D. Each "element specifier"
 # 		    in vector C has two componentes: the most-significant-half specifies an
 #		    element from either vector A or B (0 = A, 1 = B)
 #		    The least-significan-half specifies which element within the selected
@@ -60,19 +60,17 @@ main:      #Initializations
 	   # Put register data from $t0 and $t1 into vector a array
 	   # (Each byte is an element)
 	   
-           addi $t7, $zero, 0xFF000000		# Set to access leftmost element
-	   					# in register $t0
-           addi $t9, $zero, 24			# Shift amount
+           addi $t7, $zero, 0xFF000000		# Set to access leftmost element in $t0
+           addi $t9, $zero, 24			# Shift length
            
      	   # Move $t0 into vector a array	
 set1:	   and $v0, $t0, $t7			# Get one byte
            srlv $v0, $v0, $t9			# Shift element all the way to the right
-	   					# to make element moving easier
-           sw $v0, 0($s2)			# Store element into vector a array
+           sw $v0, 0($s2)			# Store element into vector A array
            addi $s2, $s2, 4			# Move to next index of array
            srl $t7, $t7, 8			# Access next element in register $t0
            addi $t9, $t9, -8 			# Decrement shift amount by 8
-           bne $t9, -8, set1			# Loop back up to keep moving elements into array
+           bne $t9, -8, set1			# Loop back
 	   	
            addi $t7, $zero, 0xFF000000		# Reset mask 
            addi $t9, $zero, 24			# Set shift amount
@@ -80,103 +78,97 @@ set1:	   and $v0, $t0, $t7			# Get one byte
 	   # Move $t1 into vector a array	
 set2:	   and $v0, $t1, $t7			# Get element
 	   srlv $v0, $v0, $t9			# Shift element all the way to the right
-	   					# to make element moving easier
-           sw $v0, 0($s2)			# Store element into vector a array
+           sw $v0, 0($s2)			# Store element into vector A array
            addi $s2, $s2, 4			# Move to next index of array
-           srl $t7, $t7, 8			# Access next element in register $t1
-           addi $t9, $t9, -8 			# Decrement shift amount by 8
-           bne $t9, -8, set2			# Loop back up to keep moving elements into array
+           srl $t7, $t7, 8			# Access next element in $t1
+           addi $t9, $t9, -8 			# Decrement shift by 8
+           bne $t9, -8, set2			# Loop back
 	   	
-           subi $s2, $s2, 32			# Reset to point to memory location 
-	   					# with label "vectorA"
+           subi $s2, $s2, 32			# Reset to point at "vectorA"
 	   	
-	   # Put register data from $t2 and $t3 into vector b array
-	   # (Each byte is an element)
+	   # Put register data from $t2 and $t3 into vector B array
 	   
-           addi $t7, $zero, 0xFF000000		#Reinitialize to access leftmost element
-	   					#in register $t2
-           addi $t9, $zero, 24			#Reinitialize shift amount
+           addi $t7, $zero, 0xFF000000		# Reset shift for leftmost in $t2
+           addi $t9, $zero, 24			# Reset shift length
            
            #Move $t2 into vector b array		   	
 set3:	   	
            and $v0, $t2, $t7			# Get element
            srlv $v0, $v0, $t9			# Shift element all the way to the right
-	   					# to make element moving easier
-           sw $v0, 0($s3)			# Store element into vector b array
+           sw $v0, 0($s3)			# Store element into vector B array
            addi $s3, $s3, 4			# Move to next index of array
-           srl $t7, $t7, 8			# Access next element in register $t2
-           addi $t9, $t9, -8 			# Decrement shift amount by 8
-           bne $t9, -8, set3			# Loop back up to keep moving elements into array
+           srl $t7, $t7, 8			# Access next element in $t2
+           addi $t9, $t9, -8 			# Decrement shift by 8
+           bne $t9, -8, set3			# Loop back
 	   	
-           addi $t7, $zero, 0xFF000000		# Reinitialize to access leftmost element
-	   					# in register $t3
-           addi $t9, $zero, 24			# Reinitialize shift amount
+           addi $t7, $zero, 0xFF000000		# Reset to access leftmost in $t3
+           addi $t9, $zero, 24			# Reset shift length
            
            # Move $t3 into vector b array
 set4:
-           and $v0, $t3, $t7		# Get element
-           srlv $v0, $v0, $t9		# Shift all the way to the right
-           sw $v0, 0($s3)		# Store element into vector B array
-           addi $s3, $s3, 4		# Move to next index of array
-           srl $t7, $t7, 8		# Access next element in register $t3
-           addi $t9, $t9, -8 		# Decrement shift amount by 8
-           bne $t9, -8, set4		# Loop back up to keep moving elements into array
+           and $v0, $t3, $t7			# Get element
+           srlv $v0, $v0, $t9			# Shift all the way to the right
+           sw $v0, 0($s3)			# Store element into vector B array
+           addi $s3, $s3, 4			# Move to next index of array
+           srl $t7, $t7, 8			# Access next element in $t3
+           addi $t9, $t9, -8 			# Decrement shift by 8
+           bne $t9, -8, set4			# Loop back
 	   	
-           subi $s3, $s3, 32		# Reset to point to memory location 
-	   				# with label "vectorB"
+           subi $s3, $s3, 32			# Reset to point to memory location 
+	   					# with label "vectorB"
 	 
            # Reinitialize for different use
-           addi $v0, $zero, 0		# Use to index vector d
-           addi $t6, $zero, 0		# To hold nibble for byte selection
-           addi $t7, $zero, 8		# Byte count
-           addi $t9, $zero, 24  	# Shift amount for correct place value
+           addi $v0, $zero, 0			# Use to index vector d
+           addi $t6, $zero, 0			# To hold half for byte selection
+           addi $t7, $zero, 8			# Byte count
+           addi $t9, $zero, 24  		# Shift amount for correct place value
 	   	
 	   # Check which vector to get the element from
 	    
 loop:	   slti $v1, $t7, 5			# If byte count < 5 
-           bne $v1, $zero, less_than_five	# go to ltf (less than five)
-           beq $v1, $zero, greater_than_five	# else go to gtf (greater than five)
+           bne $v1, $zero, less_than_five	# to less_than_five
+           beq $v1, $zero, greater_than_five	# to greater_than_five
 		
 less_than_five:				# Use $t5 of vector c since byte count < 5
            and $s6, $s5, $t5		# Get vector bits (0 or 1)
-					# $s5 specifies the (left) nibble to access
-					# $t5 is the right-most 32 bits of vector c
+					# $s5 specifies the (left) half to access
+					# $t5 is the right-most 32 bits of vector C
 		
 		
            and $t6, $s7, $t5		# Get byte selection
 					# $s7 specifies the (right) nibble to access
-					# $t5 is the right-most 32 bits of vector c	
+					# $t5 is the right-most 32 bits of vector C	
            j continue
 		
 greater_than_five:			# Use $t4 of vector c since byte count < 5
            and $s6, $s5, $t4		# Get vector bits (0 or 1)
-					# $s5 specifies the (left) nibble to access
-					# $t4 is the left-most 32 bits of vector c
+					# $s5 specifies the (left) half to access
+					# $t4 is the left-most 32 bits of vector C
 		
 		
            and $t6, $s7, $t4		# Get byte selection
-					# $s7 specifies the (right) nibble to access
-					# $t4 is the left-most 32 bits of vector c	
+					# $s7 specifies the (right) half to access
+					# $t4 is the left-most 32 bits of vector C	
 continue:
-           srl $s5, $s5, 8		# Shift for next nibble for vector selection
-           srl $s7, $s7, 8		# Shift for next nibble for byte selection
+           srl $s5, $s5, 8		# Shift for half for vector selection
+           srl $s7, $s7, 8		# Shift for half for byte selection
 
-           xor $v1, $t7, 4 		# if count != 3 (We're not on byte 3)
+           xor $v1, $t7, 4 		# if count != 3
            bne $v1, $zero, skipReset 	# go to skipReset
 		
-           addi $s5, $zero, 0xF0000000	# else we're on byte 3, so reset the
+           addi $s5, $zero, 0xF0000000	# We're on byte 3, so reset the
            addi $s7, $zero, 0x0F000000	# vector and byte selection masking registers
            addi $t9, $zero, 24		# Reset shift amount
            and $s6, $s5, $t5		# Get vector bits (0 or 1)
-					# $s5 specifies the (left) nibble to access
-					# $t5 is the right-most 32 bits of vector c
+					# $s5 specifies the (left) half to access
+					# $t5 is the right-most 32 bits of vector C
 		
 		
            and $t6, $s7, $t5		# Get byte selection
-					# $s7 specifies the (right) nibble to access
-					# $t5 is the right-most 32 bits of vector c
-           srl $s5, $s5, 8		# Shift for next nibble for vector selection
-           srl $s7, $s7, 8		# Shift for next nibble for byte selection				
+					# $s7 specifies the (right) half to access
+					# $t5 is the right-most 32 bits of vector C
+           srl $s5, $s5, 8		# Shift for half for vector selection
+           srl $s7, $s7, 8		# Shift for half for byte selection				
 		
 skipReset:  	
            beq $s6, $zero, usingVectorA	   # 0: use vector A
@@ -185,35 +177,35 @@ skipReset:
      	
            # Get one byte from vector a	
 usingVectorA:	
-           srlv $t6, $t6, $t9	# Shift to correct place value
-           sll $t6, $t6, 2	# t6 is used to hold nibble for byte selection
-     	  			# Multiply it by 4 to use as index for vectorA array
-           add $t8, $t6, $s2	# Add offset to base address of vector a. Put in $t8.
-           lw $t8, 0($t8)	# Load vector a element and store in $t8
-           add $t6, $s4, $v0	# Add vector d index, $v0, to vector d base addr, $s4
-           sw $t8, 0($t6)	# Store the vector a element into indexed vector d
-           addi $v0, $v0, 4	# Increment vector d index
+           srlv $t6, $t6, $t9		# Shift to correct place value
+           sll $t6, $t6, 2		# $t6 is used to hold half for byte selection
+     	  				# Multiply it by 4 to use as index for vector A array
+           add $t8, $t6, $s2		# Add offset to base address of vector A. Put it in $t8
+           lw $t8, 0($t8)		# Load vector A element and store in $t8
+           add $t6, $s4, $v0		# Add vector D index, $v0, to vector D base addr, $s4
+           sw $t8, 0($t6)		# Store the vector A element into indexed vector D
+           addi $v0, $v0, 4		# Increment vector D index by 4
      		
            j skipVectorB
      	
            # Get one byte from vector b	
 usingVectorB:
  
-           srlv $t6, $t6, $t9	# Shift to correct place value
-           sll $t6, $t6, 2	# t6 is used to hold nibble for byte selection
-     	  			# Multiply it by 4 to use as index for vectorB array
-           add $t8, $t6, $s3	# Add offset to base address of vector b. Put in $t8.
-           lw $t8, 0($t8)	# Load vector b element and store in $t8
-           add $t6, $s4, $v0	# Add vector d index, $v0, to vector d base addr, $s4
-           sw $t8, 0($t6)	# Store the vector b element into indexed vector d
-           addi $v0, $v0, 4	# Increment vector d index
+           srlv $t6, $t6, $t9		# Shift to correct place value
+           sll $t6, $t6, 2		# $t6 is used to hold half for byte selection
+     	  				# Multiply it by 4 to use as index for vector B array
+           add $t8, $t6, $s3		# Add offset to base address of vector B. Put it in $t8.
+           lw $t8, 0($t8)		# Load vector B element and store in $t8
+           add $t6, $s4, $v0		# Add vector D index, $v0, to vector D base addr, $s4
+           sw $t8, 0($t6)		# Store the vector B element into indexed vector d
+           addi $v0, $v0, 4		# Increment vector D index
      	
 skipVectorB:	
            addi $t7, $t7, -1	# Decrement counter
            addi $t9, $t9, -8	# Decrement shift amount
            bne $t7, $zero, loop	# Keep looping
 	  	
-           # Put vectorC array elements into destination ($s0 and $s1) "vector D"
+           # Put vector C array elements into destination ($s0 and $s1) "vector D"
 		
            # Put the first four elements into $s0
            addi $t9, $zero, 4		# $t9 is the counter
