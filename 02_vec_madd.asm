@@ -8,13 +8,13 @@
 # Description:      Vector D is the result of multiplying the vector elements in A by the
 #		    vector elements in B and then the intermediate result is add to the
 #		    vector elements in C. Note that the sum of the intermediate product with 
-#		    elements in vector C are "truncated" for half-lengh results placed into
+#		    elements in vector C are "truncated" for half-length results placed into
 #		    vector D
 
 #	
 # Register usage:  
-#		    $s0: Lower 32 bits of vector d
-#		    $s1: Upper 32 bits of vector d
+#		    $s0: Upper 32 bits of vector d
+#		    $s1: Lower 32 bits of vector d
 #
 #		    $t0: Lower 32 bits of vector a 
 #		    $t1: Upper 32 bits of vector a
