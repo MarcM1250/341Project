@@ -14,10 +14,10 @@
 #		    $s2: Shift amount for upper 32 bits
 #		    $s0: Upper 32 bits of vector d
 #		    $s1: Lower 32 bits of vector d 
-#		    $t1: Upper 32 bits of vector a
-#		    $t0: Lower 32 bits of vector a
-#		    $t3: Upper 32 bits of vector b
-#		    $t2: Lower 32 bits of vector b
+#		    $t1: Lower 32 bits of vector a
+#		    $t0: Upper 32 bits of vector a
+#		    $t3: Lower 32 bits of vector b
+#		    $t2: Upper 32 bits of vector b
 #		    $t8: Masks that allows us to access 4 bits of a vector
 #		    $t9: Holds shifting value
 #		    $v1: Counter for vector elements
@@ -39,21 +39,21 @@ main:      #Initializations
 			
            addi $t8, $zero, 0x0F000000		# Use to access the 4 bits from current element
 
-           addi $t0, $zero, 0x5AFB6C1D		# Initialize lower 32 bits of vector a
-           addi $t1, $zero, 0xAE5FC041 	        # Initialize upper 32 bits of vector a
-           addi $t2, $zero, 0x52F3A415		# Initialize lower 32 bits of vector b
-           addi $t3, $zero, 0xA657C849 		# Initialize upper 32 bits of vector b
+           addi $t0, $zero, 0x5AFB6C1D		# Initialize upper 32 bits of vector a
+           addi $t1, $zero, 0xAE5FC041 	        # Initialize lower 32 bits of vector a
+           addi $t2, $zero, 0x52F3A415		# Initialize upper 32 bits of vector b
+           addi $t3, $zero, 0xA657C849 		# Initialize lower 32 bits of vector b
                            
 miniLoop1:  
            beq $v1, 4, exitMiniLoop1    
-           and $t4, $t0, $t8		# Get 4 bits from lower 32 bits of vector A
-           and $t5, $t2, $t8		# Get 4 bits from lower 32 bits of vector B
+           and $t4, $t0, $t8		# Get 4 bits from upper 32 bits of vector A
+           and $t5, $t2, $t8		# Get 4 bits from upper 32 bits of vector B
            
            sllv $t4, $t4, $t9		# Shift left 4 bits
            sllv $t5, $t5, $t9		# Shift left 4 bits
            
-           add $s0, $s0, $t4		# Save result in lower vector D
-           add $s1, $s1, $t5		# Save result in upper vector D
+           add $s0, $s0, $t4		# Save result in upper vector D
+           add $s1, $s1, $t5		# Save result in lower vector D
            
            addi $t9, $t9, 4
            srl $t8, $t8, 8		# Shift right 8 bits to grab next element
@@ -66,14 +66,14 @@ exitMiniLoop1:
            
 miniLoop2:
            beq $v1, 8, exit    
-           and $t4, $t1, $t8		# Get 4 bits from upper 32 bits of vector A
-           and $t5, $t3, $t8		# Get 4 bits from upper 32 bits of vector B
+           and $t4, $t1, $t8		# Get 4 bits from lower 32 bits of vector A
+           and $t5, $t3, $t8		# Get 4 bits from lower 32 bits of vector B
            
            srlv $t4, $t4, $t9		# Shift left 12, 8, 4, 0 bits
            srlv $t5, $t5, $t9		# Shift left 12, 8, 4, 0 bits
            
-           add $s0, $s0, $t4		# Save result in lower vector D
-           add $s1, $s1, $t5		# Save result in upper vector D
+           add $s0, $s0, $t4		# Save result in upper vector D
+           add $s1, $s1, $t5		# Save result in lower vector D
            
            addi $t9, $t9, -4
            srl $t8, $t8, 8		# Shift right 8 bits to grab next element
