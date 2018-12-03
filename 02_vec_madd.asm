@@ -21,7 +21,7 @@
 #		    $t2: Lower 32 bits of vector b
 #		    $t3: Upper 32 bits of vector b
 #		    $t4: Lower 32 bits of vector c
-#		    $t5: Lower 32 bits of vector d
+#		    $t5: Upper 32 bits of vector c
 #
 #		    $t8: Mask that allows us to access 4 bits of a vector
 #		    $t9: Holds shifting value
