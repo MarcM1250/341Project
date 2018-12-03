@@ -19,7 +19,6 @@
 #		    $t5: Sum of current elements from vectors a and b
 #		    $t6: Rightmost element of upper 32 bits
 #		    $t7: Equal to 1 when using lower 32 bits
-#		    $s0: One byte of vector b 
 #		    $t8: One byte of vector a
 #		    $t9: Masks to access 8-bit element
 #		    $v0: Equals to 0 when overflow does not happen
