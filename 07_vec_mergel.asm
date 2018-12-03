@@ -8,7 +8,6 @@
 # Description:      Even elements of the result vector D are obtained left-to-right from the low 
 #		    elements of vectors A. The odd elements of the result are obtained left-to-right
 #		    from the low elements of vector B
-#		    
 #
 # Register usage:   $s0: Upper 32 bits of vector d
 #		    $s1: Lower 32 bits of vector d
@@ -57,7 +56,7 @@ main:      #Initializations
 						# 0000AA00 + 0x000000BB	
 		add $s5, $t6, $t7		# $s5 = 0x0000AABB
 		
-		# Store in $s0 lower 32 bit of vector D
+		# Store in $s0 (upper 32 bit of vector D)
 		add $s0, $s4, $s5
 			
 		# $s1
@@ -74,7 +73,7 @@ main:      #Initializations
 						# 0000AA00 + 0x000000BB	
 		add $s5, $t6, $t7		# $s5 = 0x0000AABB
 		
-		# Store in $s0 upper 32 bit of vector D
+		# Store in $s1 (lower 32 bit of vector D)
 		add $s1, $s4, $s5
 		
 
