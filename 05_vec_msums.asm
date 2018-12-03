@@ -12,7 +12,7 @@
 #		    16 bit saturating addition (no wrap)
 #
 # Register usage:
-#       $s0: Upper 32 bits of vector c
+#		    $s0: Upper 32 bits of vector c
 #		    $s1: Lower 32 bits of vector c
 #		    $s2: Upper 32 bits of vector d
 #		    $s3: Lower 32 bits of vector d
@@ -41,7 +41,7 @@ main:      # Initializations
            addi $s7, $zero, 0			# Clear register to store lower 32 bits
            addi $s6, $zero, 0			# Clear register to store upper 32 bits
 
-           # Set by user
+           # Setting testing values
            addi $t0, $zero, 0x230CF14D 	        # Set upper 32 bits of vector a
            addi $t1, $zero, 0x5C7F191A		# Set lower 32 bits of vector a
            addi $t2, $zero, 0xA30C5BFD 		# Set upper 32 bits of vector b       
