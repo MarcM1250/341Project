@@ -76,7 +76,7 @@ main:      # ************* Code starts here ***********
            srl $t7, $t7, 24	
            srl $t6, $t3, 24	   	
 
-           # Multiply even bytes and save them in upper 32 vector d ($s1)
+           # Multiply even bytes and save them in lower 32 vector d ($s1)
 
            mult $t4, $t6		
            mflo $t4
