@@ -56,7 +56,7 @@ main:      # ************* Code starts here ***********
            sll $t6, $t2, 8		# left one byte
            srl $t6, $t6, 24	   	# right three bytes	   	
 
-           # Multiply odd bytes and save them in lower 32 vector d ($s0)
+           # Multiply odd bytes and save them in upper 32 vector d ($s0)
 
            mult $t4, $t6		# $t4 = s0[1]*s0[3] 
            mflo $t4			# $t4 = 0x0000XXXX
@@ -79,7 +79,7 @@ main:      # ************* Code starts here ***********
            sll $t6, $t3, 8		# left one byte
            srl $t6, $t6, 24	   	# right three bytes	   	
 
-           # Multiply odd bytes and save them in upper 32 vector d ($s1)
+           # Multiply odd bytes and save them in lower 32 vector d ($s1)
 
            mult $t4, $t6		
            mflo $t4
